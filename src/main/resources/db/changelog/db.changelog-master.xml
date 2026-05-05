@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="
+        http://www.liquibase.org/xml/ns/dbchangelog
+        https://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.23.xsd">
+
+    <changeSet id="1-init-schema" author="assistant">
+        <sql>
+            CREATE TABLE clients (
+                id UUID PRIMARY KEY,
+                client_id VARCHAR(128) NOT NULL UNIQUE,
+                secret_hash VARCHAR(255) NOT NULL,
+                enabled BOOLEAN NOT NULL DEFAULT TRUE,
+                created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
+                updated_at TIMESTAMPTZ NOT NULL DEFAULT now()
+            );
+
+            CREATE TABLE metrics (
+                id UUID PRIMARY KEY,
+                client_id VARCHAR(128) NOT NULL,
+                ts TIMESTAMPTZ NOT NULL,
+                value NUMERIC(20, 6) NOT NULL CHECK (value > 0),
+                payload JSONB NOT NULL,
+                created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
+                updated_at TIMESTAMPTZ NOT NULL DEFAULT now()
+            );
+
+            CREATE INDEX idx_metrics_ts ON metrics(ts);
+            CREATE INDEX idx_metrics_client_ts ON metrics(client_id, ts);
+        </sql>
+    </changeSet>
+
+    <changeSet id="2-seed-client-demo" author="assistant">
+        <comment>Демо-клиент для POST /auth (ТЗ не описывает регистрацию; идентификатор фиксирован в миграции).</comment>
+        <sql>
+            INSERT INTO clients (id, client_id, secret_hash, enabled, created_at, updated_at)
+            VALUES (
+                'a0eebc99-9c0b-4ef8-bb6d-6bb9bd380a11',
+                'demo',
+                'not-used',
+                TRUE,
+                now(),
+                now()
+            );
+        </sql>
+    </changeSet>
+
+</databaseChangeLog>

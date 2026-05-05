@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Metrics Service UI</title>
+    <link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+<main class="container">
+    <h1>Metrics Service UI</h1>
+
+    <div class="tabs">
+        <button class="tab-btn active" data-tab="auth-tab">Регистрация и вход</button>
+        <button class="tab-btn" data-tab="create-tab">Создать метрику</button>
+        <button class="tab-btn" data-tab="read-tab">Получить метрики</button>
+    </div>
+
+    <section id="auth-tab" class="card tab-panel active">
+        <h2>POST /sign-up</h2>
+        <form id="signup-form">
+            <label>clientId <input id="signup-client-id" required placeholder="my-client" /></label>
+            <button type="submit">Sign Up</button>
+        </form>
+
+        <p class="hint">После регистрации получите JWT через <code>POST /auth</code> (поле ТЗ — <code>clientID</code>, можно тем же значением). Демо в БД: <code>demo</code>.</p>
+        <h2>POST /auth</h2>
+        <form id="auth-form">
+            <label>clientID <input id="auth-client-id" required placeholder="demo" /></label>
+            <button type="submit">Auth</button>
+        </form>
+
+        <label>Текущий JWT
+            <textarea id="shared-token" rows="4" placeholder="JWT"></textarea>
+        </label>
+    </section>
+
+    <section id="create-tab" class="card tab-panel">
+        <h2>Отправка метрики</h2>
+        <form id="metric-form">
+            <label>Token
+                <textarea id="metric-token" rows="3" required placeholder="Вставьте JWT"></textarea>
+            </label>
+            <label>Timestamp
+                <input id="metric-timestamp" type="datetime-local" step="1" required />
+            </label>
+            <label>Value <input id="metric-value" type="number" step="0.000001" min="0.000001" required /></label>
+            <label>Payload JSON <textarea id="metric-payload" rows="4" required>{"source":"ui"}</textarea></label>
+            <button type="submit">Send Metric</button>
+        </form>
+    </section>
+
+    <section id="read-tab" class="card tab-panel">
+        <h2>Получение агрегатов</h2>
+        <form id="stats-form">
+            <label>Token
+                <textarea id="stats-token" rows="3" required placeholder="Вставьте JWT"></textarea>
+            </label>
+            <label>From
+                <input id="stats-from" type="datetime-local" step="1" required />
+            </label>
+            <label>To
+                <input id="stats-to" type="datetime-local" step="1" required />
+            </label>
+            <button type="submit">Get Metrics</button>
+        </form>
+        <pre id="stats-output" class="output"></pre>
+    </section>
+
+    <section class="card">
+        <h2>Системные сообщения</h2>
+        <pre id="messages" class="output"></pre>
+    </section>
+</main>
+<script src="./main.js"></script>
+</body>
+</html>

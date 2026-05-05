@@ -1,0 +1,102 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #f4f6f8;
+    color: #1d2939;
+}
+
+.container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 24px;
+}
+
+h1 {
+    margin-bottom: 20px;
+}
+
+.tabs {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 12px;
+}
+
+.tab-btn {
+    border: 1px solid #d0d5dd;
+    background: #ffffff;
+    border-radius: 6px;
+    padding: 8px 12px;
+}
+
+.tab-btn.active {
+    background: #1d4ed8;
+    color: #ffffff;
+    border-color: #1d4ed8;
+}
+
+.card {
+    background: #fff;
+    border: 1px solid #d0d5dd;
+    border-radius: 8px;
+    padding: 16px;
+    margin-bottom: 16px;
+}
+
+.tab-panel {
+    display: none;
+}
+
+.tab-panel.active {
+    display: block;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+label {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    font-size: 14px;
+}
+
+input,
+textarea,
+button {
+    font: inherit;
+    padding: 8px;
+}
+
+button {
+    width: fit-content;
+    cursor: pointer;
+}
+
+.output {
+    background: #0f172a;
+    color: #e2e8f0;
+    border-radius: 6px;
+    padding: 12px;
+    min-height: 60px;
+    white-space: pre-wrap;
+    word-break: break-word;
+}
+
+.token-row {
+    margin-top: 10px;
+}
+
+.hint {
+    margin: 0 0 12px;
+    padding: 10px 12px;
+    background: #eef2ff;
+    border-radius: 6px;
+    font-size: 0.95rem;
+}
