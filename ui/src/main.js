@@ -104,10 +104,10 @@ document.getElementById("signup-form").addEventListener("submit", async (event) 
 
 document.getElementById("auth-form").addEventListener("submit", async (event) => {
   event.preventDefault();
-  const clientID = document.getElementById("auth-client-id").value.trim();
+  const clientId = document.getElementById("auth-client-id").value.trim();
 
-  if (!clientID) {
-    logMessage("Ошибка: укажите clientID для auth.");
+  if (!clientId) {
+    logMessage("Ошибка: укажите clientId для auth.");
     return;
   }
 
@@ -115,7 +115,7 @@ document.getElementById("auth-form").addEventListener("submit", async (event) =>
     const data = await request("auth", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ clientID })
+      body: JSON.stringify({ clientId })
     });
     accessToken = data.jwt || "";
     sharedTokenEl.value = accessToken;

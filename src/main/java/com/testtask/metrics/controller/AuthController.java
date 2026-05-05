@@ -19,9 +19,9 @@ public class AuthController {
     }
 
     /**
-     * POST /auth: вход по {@code clientID}, ответ с JWT (ТЗ).
+     * POST /auth: вход по {@code clientId}, ответ с JWT (ТЗ).
      *
-     * @param request JSON с полем {@code clientID}
+     * @param request JSON с полем {@code clientId}
      * @return HTTP 200 и {@link AuthDtos.AuthResponse}
      */
     @PostMapping("/auth")

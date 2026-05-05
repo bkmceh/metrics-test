@@ -8,9 +8,9 @@ public final class AuthDtos {
     }
 
     /**
-     * Тело POST /auth по ТЗ: поле {@code clientID}.
+     * Тело POST /auth по ТЗ: поле {@code clientId}.
      */
-    public record AuthRequest(@NotBlank @JsonProperty("clientID") String clientID) {
+    public record AuthRequest(@NotBlank @JsonProperty("clientId") String clientId) {
     }
 
     /**

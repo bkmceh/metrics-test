@@ -21,13 +21,13 @@ public class AuthService {
     }
 
     /**
-     * Выдаёт JWT по {@code clientID}, если клиент существует и активен (см. ТЗ).
+     * Выдаёт JWT по {@code clientId}, если клиент существует и активен (см. ТЗ).
      *
-     * @param request тело с полем {@code clientID}
+     * @param request тело с полем {@code clientId}
      * @return обёртка с полем {@code jwt}
      */
     public AuthDtos.AuthResponse authenticate(AuthDtos.AuthRequest request) {
-        ClientEntity client = clientRepository.findByClientId(request.clientID())
+        ClientEntity client = clientRepository.findByClientId(request.clientId())
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.UNAUTHORIZED, "Unknown client"));
 
         if (!client.isEnabled()) {

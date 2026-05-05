@@ -9,7 +9,7 @@ REST-сервис приёма и агрегации метрик (тестов�
 | Метод | Описание |
 |--------|----------|
 | `POST /sign-up` | Регистрация: **`clientId`** в JSON → запись в БД; затем можно вызвать `POST /auth` |
-| `POST /auth` | Вход: **`clientID`** (как в ТЗ), ответ: **JWT** |
+| `POST /auth` | Вход: **`clientId`** (как в ТЗ), ответ: **JWT** |
 | `POST /metrics` | Приём метрики (`timestamp` с TZ, `value` > 0, `payload` JSON), JWT, rate limit |
 | `GET /metrics` | Статистика `count`, `avg`, `min`, `max` по query `from`, `to` (ISO 8601 с TZ), JWT, rate limit |
 
@@ -85,7 +85,7 @@ PostgreSQL: реляционная модель, `JSONB` для `payload`, ти�
 ### `POST /auth`
 
 ```json
-{ "clientID": "demo" }
+{ "clientId": "demo" }
 ```
 
 Ответ:
@@ -140,11 +140,11 @@ curl -s -X POST http://localhost:8080/sign-up \
 
 curl -s -X POST http://localhost:8080/auth \
   -H "Content-Type: application/json" \
-  -d '{"clientID":"demo"}'
+  -d '{"clientId":"demo"}'
 
 TOKEN=$(curl -s -X POST http://localhost:8080/auth \
   -H "Content-Type: application/json" \
-  -d '{"clientID":"demo"}' | sed -E 's/.*"jwt":"([^"]+)".*/\1/')
+  -d '{"clientId":"demo"}' | sed -E 's/.*"jwt":"([^"]+)".*/\1/')
 
 curl -X POST http://localhost:8080/metrics \
   -H "Authorization: Bearer $TOKEN" \

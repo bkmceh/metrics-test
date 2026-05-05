@@ -73,7 +73,7 @@ class MetricsSecurityIntegrationTest {
         authHeaders.setContentType(MediaType.APPLICATION_JSON);
         ResponseEntity<String> authResponse = restTemplate.postForEntity(
                 url("/auth"),
-                new HttpEntity<>("{\"clientID\":\"" + clientId + "\"}", authHeaders),
+                new HttpEntity<>("{\"clientId\":\"" + clientId + "\"}", authHeaders),
                 String.class
         );
         assertThat(authResponse.getStatusCode().value()).isEqualTo(200);
@@ -84,7 +84,7 @@ class MetricsSecurityIntegrationTest {
     void postAuthDemo_returnsJwt() throws Exception {
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
-        HttpEntity<String> entity = new HttpEntity<>("{\"clientID\":\"demo\"}", headers);
+        HttpEntity<String> entity = new HttpEntity<>("{\"clientId\":\"demo\"}", headers);
 
         ResponseEntity<String> response = restTemplate.postForEntity(url("/auth"), entity, String.class);
 
@@ -97,7 +97,7 @@ class MetricsSecurityIntegrationTest {
     void postAuth_unknownUser_returns401() throws Exception {
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
-        HttpEntity<String> entity = new HttpEntity<>("{\"clientID\":\"unknown-client\"}", headers);
+        HttpEntity<String> entity = new HttpEntity<>("{\"clientId\":\"unknown-client\"}", headers);
 
         ResponseEntity<String> response = restTemplate.postForEntity(url("/auth"), entity, String.class);
 
